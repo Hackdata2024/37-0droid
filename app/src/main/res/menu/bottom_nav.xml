@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/homeFragment"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        />
+    <item
+        android:id="@id/farmingFragment"
+        android:title="Farm"
+        android:icon="@drawable/ic_shop"
+        />
+    <item
+        android:id="@id/marketFragment"
+        android:title="Chats"
+        android:icon="@drawable/ic_chat"
+        />
+    <item
+        android:id="@id/fundsFragment"
+        android:title="Funds"
+        android:icon="@drawable/ic_fund"
+        />
+
+</menu>
