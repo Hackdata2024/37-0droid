@@ -219,6 +219,12 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    private fun stopSpeaking() {
+        if (textToSpeech.isSpeaking) {
+            textToSpeech.stop()
+        }
+    }
+
     private fun startSpeechRecognition() {
         val speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext())
 
@@ -239,6 +245,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onError(error: Int) {
+                dismissListeningDialog()
+                stopSpeaking()
                 Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
             }
 
@@ -247,11 +255,13 @@ class HomeFragment : Fragment() {
                 if (matches != null && matches.isNotEmpty()) {
                     val spokenText = matches[0].toLowerCase()
 
-                    val diseaseDetectionKeywords = listOf("disease detection", "open disease detection","how to check for disease detection",)
+                    val diseaseDetectionKeywords = listOf("disease detection", "open disease detection", "how to check for disease detection")
                     val recommendedCropsKeywords = listOf("recommended crops", "open recommended crops", "how to check recommended crops")
-                    val currentWeatherKeywords = listOf("current weather","what is todays weather","tell me weather","weather")
+                    val currentWeatherKeywords = listOf("current weather", "what is today's weather", "tell me weather", "weather")
+                    val readNewsKeywords = listOf("read news", "news","samachar","updates","today news")
+                    val stopKeywords = listOf("stop","ruko","please stop")
 
-                    val regexPattern = "\\b(?:${(diseaseDetectionKeywords + recommendedCropsKeywords + currentWeatherKeywords).joinToString("|")})\\b"
+                    val regexPattern = "\\b(?:${(diseaseDetectionKeywords + recommendedCropsKeywords + currentWeatherKeywords + readNewsKeywords + stopKeywords).joinToString("|")})\\b"
 
                     val regex = Regex(regexPattern)
                     val matchedKeywords = regex.findAll(spokenText).map { it.value }.toList()
@@ -270,13 +280,26 @@ class HomeFragment : Fragment() {
                                 val sentenceToSpeak = "Current temp is ${weatherModel!!.temp} and humidity is ${weatherModel!!.humidity}"
                                 textToSpeech.speak(sentenceToSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
                             }
+                            matchedKeywords.any { it in readNewsKeywords } -> {
+                                if (!isReadingNews) {
+                                    startReadingNews()
+                                } else {
+                                    Toast.makeText(requireContext(), "Already reading news", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            matchedKeywords.any { it in stopKeywords } -> {
+                                stopSpeaking()
+                                Toast.makeText(requireContext(), "Stopped speaking", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     } else {
+
                         Toast.makeText(requireContext(), "Command not recognized", Toast.LENGTH_SHORT).show()
                     }
                 }
                 dismissListeningDialog()
             }
+
 
 
 
@@ -424,6 +447,33 @@ class HomeFragment : Fragment() {
         sdf.timeZone = TimeZone.getDefault()
         return sdf.format(Date(time * 1000))
     }
+
+    private var isReadingNews = false
+
+    private fun startReadingNews() {
+        isReadingNews = true
+        val newsSize = newsList.size
+        var currentIndex = 0
+
+        // Create a function to read the news article
+        fun readNewsArticle() {
+            if (currentIndex < newsSize) {
+                val news = newsList[currentIndex]
+                val newsTitle = news.title
+                val newsDescription = news.description
+
+                val sentenceToSpeak = "$newsTitle. $newsDescription"
+                textToSpeech.speak(sentenceToSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
+
+                currentIndex++
+            } else {
+                isReadingNews = false
+            }
+        }
+
+        readNewsArticle()
+    }
+
 
 
 
