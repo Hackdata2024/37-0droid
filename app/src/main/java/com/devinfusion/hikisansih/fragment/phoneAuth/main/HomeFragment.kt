@@ -293,7 +293,7 @@ class HomeFragment : Fragment() {
                             }
                         }
                     } else {
-
+                        stopSpeaking()
                         Toast.makeText(requireContext(), "Command not recognized", Toast.LENGTH_SHORT).show()
                     }
                 }
