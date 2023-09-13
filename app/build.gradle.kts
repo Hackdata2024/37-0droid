@@ -55,7 +55,7 @@ dependencies {
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.airbnb.android:lottie:3.4.0")
     implementation ("org.tensorflow:tensorflow-lite:2.5.0")
-
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 
 

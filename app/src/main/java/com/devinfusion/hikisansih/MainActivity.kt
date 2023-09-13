@@ -41,9 +41,6 @@ class MainActivity : AppCompatActivity() {
                 if (dataSnapshot.exists()) {
                     val user = dataSnapshot.getValue(Kisan::class.java)
                     if (user != null) {
-                        val navController = findNavController(R.id.fragment)
-
-                        NavigationUI.setupWithNavController(binding.bottomNav,navController)
 
                         Paper.book().write("user", user)
                     }else{

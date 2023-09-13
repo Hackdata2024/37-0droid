@@ -49,6 +49,8 @@ class OTPFragment : Fragment() {
         OTP = arguments?.getString("OTP")!!
         resendToken = arguments?.getParcelable<PhoneAuthProvider.ForceResendingToken>("resendToken")!!
 
+        binding.phoneNumber.text = "+91-$number"
+
         binding.continueButton.setOnClickListener {
             val otp : String = binding.otpEt.text.toString().trim()
             if (otp.isNotEmpty()){

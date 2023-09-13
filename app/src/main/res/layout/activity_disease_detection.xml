@@ -4,28 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.phoneAuth.main.FundsFragment"
+    tools:context=".activities.DiseaseDetectionActivity"
     android:orientation="vertical">
 
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="480dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recomended Crops"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cropRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        />
-
-    <Button
-        android:id="@+id/detectButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Detect Disease"
-        android:drawableStart="@drawable/ic_location"
-        android:layout_marginHorizontal="18dp"
         />
 
 

@@ -1,36 +1,30 @@
-package com.devinfusion.hikisansih.fragment.phoneAuth.main
+package com.devinfusion.hikisansih.activities
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devinfusion.hikisansih.R
-import com.devinfusion.hikisansih.activities.PlantDetectionActivity
 import com.devinfusion.hikisansih.adapter.CropAdapter
-import com.devinfusion.hikisansih.databinding.FragmentFundBinding
+import com.devinfusion.hikisansih.databinding.ActivityDiseaseDetectionBinding
 import com.devinfusion.hikisansih.model.CropDetails
 import com.devinfusion.hikisansih.model.WeatherRvModel
 import com.devinfusion.hikisansih.model.location
 import io.paperdb.Paper
 
+class DiseaseDetectionActivity : AppCompatActivity() {
 
-class FundsFragment : Fragment() {
-
-    private var _binding : FragmentFundBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding : ActivityDiseaseDetectionBinding
 
     private val cropRecommendations = mapOf(
         "Cold" to listOf("Wheat", "Barley", "Potatoes", "Carrots", "Cabbage"),
         "Moderate" to listOf("Corn", "Soybeans", "Sunflowers", "Tomatoes", "Peppers"),
         "Warm" to listOf("Rice", "Cotton", "Sugarcane", "Maize", "Peanuts")
     )
-
     // Define crop details
     private val cropDetails = mapOf(
         "Wheat" to CropDetails("wheat","Cold", 120, 100, "Recommended", "Pre-soak in water for 24 hours",R.drawable.wheat),
@@ -45,12 +39,11 @@ class FundsFragment : Fragment() {
         // Add more crops and details as needed
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFundBinding.inflate(layoutInflater,container,false)
-        Paper.init(requireContext())
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityDiseaseDetectionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        Paper.init(this@DiseaseDetectionActivity)
 
         val loc : location? = Paper.book().read<location>("location")
         val weatherModel : WeatherRvModel? = Paper.book().read<WeatherRvModel>("weather")
@@ -76,7 +69,8 @@ class FundsFragment : Fragment() {
 
         binding.webView.loadUrl("file:///android_asset/map.html")
 
-        binding.cropRV.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.cropRV.layoutManager = LinearLayoutManager(this@DiseaseDetectionActivity,
+            LinearLayoutManager.HORIZONTAL,false)
         val recommendedCrops = recommendCrops(weatherModel!!.temp)
         val cropDetailsList = mutableListOf<CropDetails>()
         for (cropName in recommendedCrops) {
@@ -90,14 +84,7 @@ class FundsFragment : Fragment() {
         binding.cropRV.adapter = adapter
         adapter.notifyDataSetChanged()
 
-        binding.detectButton.setOnClickListener {
-            startActivity(Intent(requireContext(), PlantDetectionActivity::class.java))
-        }
-
-
-        return binding.root
     }
-
     private fun recommendCrops(temperature: Int): List<String> {
         return when {
             temperature >= 0 && temperature <= 10 -> cropRecommendations["Cold"] ?: emptyList()
@@ -106,10 +93,4 @@ class FundsFragment : Fragment() {
             else -> emptyList()
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

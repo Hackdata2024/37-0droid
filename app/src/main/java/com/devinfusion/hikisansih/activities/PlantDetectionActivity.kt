@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import com.devinfusion.hikisansih.Classifier
 import com.devinfusion.hikisansih.R
 import com.devinfusion.hikisansih.databinding.ActivityPlantDetectionBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 
 class PlantDetectionActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class PlantDetectionActivity : AppCompatActivity() {
     private val mInputSize = 224
     private val mModelPath = "plant_disease_model.tflite"
     private val mLabelPath = "plant_labels.txt"
-    private val mSamplePath = "soybean.JPG"
+    private val mSamplePath = "soyabean.png"
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -56,8 +57,25 @@ class PlantDetectionActivity : AppCompatActivity() {
         }
         binding.mDetectButton.setOnClickListener {
             val results = mClassifier.recognizeImage(mBitmap).firstOrNull()
-            binding.mResultTextView.text= results?.title+"\n Confidence:"+results?.confidence
 
+            val builder = MaterialAlertDialogBuilder(this)
+
+            builder.setTitle(results?.title)
+                .setMessage("Confidence ${results?.confidence}")
+
+            builder.setPositiveButton("OK") { dialog, which ->
+                dialog.dismiss() // Close the dialog
+            }
+
+            builder.setNegativeButton("Cancel") { dialog, which ->
+                dialog.dismiss() // Close the dialog
+            }
+
+            // Create and show the Material AlertDialog
+            val alertDialog = builder.create()
+            alertDialog.show()
+
+//            binding.mResultTextView.text= results?.title+"\n Confidence:"+results?.confidence
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
