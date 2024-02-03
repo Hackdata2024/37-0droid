@@ -84,9 +84,9 @@ class PlantDetectionActivity : AppCompatActivity() {
             if(resultCode == Activity.RESULT_OK && data != null) {
                 mBitmap = data.extras!!.get("data") as Bitmap
                 mBitmap = scaleImage(mBitmap)
-                val toast = Toast.makeText(this, ("Image crop to: w= ${mBitmap.width} h= ${mBitmap.height}"), Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.BOTTOM, 0, 20)
-                toast.show()
+//                val toast = Toast.makeText(this, ("Image crop to: w= ${mBitmap.width} h= ${mBitmap.height}"), Toast.LENGTH_LONG)
+//                toast.setGravity(Gravity.BOTTOM, 0, 20)
+//                toast.show()
                 binding.mPhotoImageView.setImageBitmap(mBitmap)
                 binding.mResultTextView.text= "Your photo image set now."
             } else {
