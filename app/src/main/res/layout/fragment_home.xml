@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.phoneAuth.main.HomeFragment"
+    android:layout_height="match_parent"
+     android:layout_width="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/mainCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent">
+                <ImageView
+                    android:id="@+id/backgroundImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/rain_background"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginTop="18dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_location_black"
+                            />
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gurugram"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            />
+                        <TextView
+                            android:id="@+id/minMaxTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="32 / 42"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/moon_cloud"
+                            />
+                        <TextView
+                            android:id="@+id/mainTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="50'"
+                            android:textSize="45sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/wind"
+                                    />
+                                <TextView
+                                    android:id="@+id/windSpeed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="19 km/h"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:layout_marginStart="10dp"
+                                    />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                >
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/drop"
+                                    />
+                                <TextView
+                                    android:id="@+id/precipitation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="90"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:layout_marginStart="10dp"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/weatherView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@drawable/blur_background"
+                        app:cardCornerRadius="30dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/litsenText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:text="Clouds with rain" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/litsenButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:drawableStart="@drawable/speaker"
+                                android:text="Listen"
+                                android:drawableTint="@color/black"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                android:backgroundTint="#4D512DA8"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="18dp"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:background="#00000000"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Expert Consultation"
+                            android:textSize="18sp"
+                            android:textColor="#512DA8"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Get free support from our customer service"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/information"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            >
+            <Button
+                android:id="@+id/diseaseDetection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disease Detection"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/recomendedCrops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recomended Crops"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="75dp"
+            android:clipToPadding="false"
+            />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
